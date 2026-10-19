@@ -6,8 +6,8 @@
 
 Drop a `package-lock.json`, `pnpm-lock.yaml`, `yarn.lock` or `bun.lock` and see, in seconds, which exact versions are **malware**, **vulnerable**, **too fresh to trust**, **pulled from npm**, run **install scripts**, or carry **copyleft licences**. It runs in your browser, in your terminal and in CI.
 
-[![CI](https://github.com/feresbr1/lockspect/actions/workflows/ci.yml/badge.svg)](https://github.com/feresbr1/lockspect/actions/workflows/ci.yml)
-[![Deploy](https://github.com/feresbr1/lockspect/actions/workflows/pages.yml/badge.svg)](https://github.com/feresbr1/lockspect/actions/workflows/pages.yml)
+[![Live app](https://img.shields.io/badge/live-feresbr1.github.io%2Flockspect-e8a33d)](https://feresbr1.github.io/lockspect/)
+[![Release](https://img.shields.io/github/v/release/feresbr1/lockspect)](https://github.com/feresbr1/lockspect/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ### [Open lockspect →](https://feresbr1.github.io/lockspect/)
@@ -193,7 +193,7 @@ npm run test:e2e     # Playwright, desktop + mobile (npx playwright install chro
 npm run check        # format, lint, typecheck, tests, build
 ```
 
-`npm run build` writes the site to `dist/web` and the CLI to `dist/cli/lockspect.mjs`. The CLI bundle is committed so that `npx github:` and the GitHub Action work without a build step, and CI fails if it is out of date.
+`npm run build` writes the site to `dist/web` and the CLI to `dist/cli/lockspect.mjs`. `npm run deploy` publishes `dist/web` to the `gh-pages` branch that GitHub Pages serves. The CLI bundle is committed so that `npx github:` and the GitHub Action work without a build step, and CI fails if it is out of date.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, and [docs/PRODUCT_DECISIONS.md](docs/PRODUCT_DECISIONS.md) for why lockspect works the way it does.
 
