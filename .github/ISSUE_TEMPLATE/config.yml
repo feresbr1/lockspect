@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security vulnerability in lockspect
+    url: https://github.com/feresbr1/lockspect/security/advisories/new
+    about: Please report vulnerabilities privately.
+  - name: Report a malicious npm package
+    url: https://github.com/ossf/malicious-packages
+    about: lockspect reads OSV.dev, so malicious packages are reported upstream.

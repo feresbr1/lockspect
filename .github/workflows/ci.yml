@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Committed CLI bundle is up to date
+        run: git diff --exit-code -- dist/cli
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+
+  cli-node-versions:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [18, 22]
+        exclude:
+          - os: macos-latest
+            node: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Bundled CLI runs with no dependencies installed
+        run: node dist/cli/lockspect.mjs test/fixtures/pnpm-lock.v9.yaml --fail-on none --allow-incomplete
+
+  self-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan our own lockfile with the GitHub Action
+        uses: ./
+        with:
+          fail-on: malware,vuln:critical

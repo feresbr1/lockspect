@@ -1,0 +1,36 @@
+name: Bug report
+description: Something is wrong, for example a lockfile that is parsed or reported incorrectly.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you expect, and what did lockspect show instead?
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where
+      options:
+        - Website
+        - CLI
+        - GitHub Action
+    validations:
+      required: true
+  - type: input
+    id: manager
+    attributes:
+      label: Package manager and version
+      placeholder: pnpm 10.33.0
+  - type: textarea
+    id: lockfile
+    attributes:
+      label: Minimal lockfile
+      description: A small lockfile that reproduces the problem. Remove private package names first.
+      render: text
+  - type: input
+    id: env
+    attributes:
+      label: Browser or Node.js version

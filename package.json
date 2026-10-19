@@ -1,0 +1,76 @@
+{
+  "name": "lockspect",
+  "version": "1.0.0",
+  "description": "Inspect any JavaScript lockfile for malware, known vulnerabilities, too-fresh releases, unpublished versions, install scripts and license risk. Runs in your browser or CI.",
+  "type": "module",
+  "license": "MIT",
+  "author": "feresbr1",
+  "homepage": "https://feresbr1.github.io/lockspect/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feresbr1/lockspect.git"
+  },
+  "bugs": {
+    "url": "https://github.com/feresbr1/lockspect/issues"
+  },
+  "keywords": [
+    "lockfile",
+    "supply-chain-security",
+    "npm",
+    "pnpm",
+    "yarn",
+    "bun",
+    "osv",
+    "malware",
+    "vulnerability-scanner",
+    "dependency-cooldown",
+    "minimum-release-age",
+    "npm-audit"
+  ],
+  "bin": {
+    "lockspect": "dist/cli/lockspect.mjs"
+  },
+  "files": [
+    "dist/cli",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build:web && npm run build:cli",
+    "build:web": "vite build",
+    "build:cli": "node scripts/build-cli.mjs",
+    "preview": "vite preview --port 4173 --strictPort",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "preact": "^10.27.0",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.1",
+    "@preact/preset-vite": "^2.10.6",
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "prettier": "^3.6.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.71.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5"
+  }
+}

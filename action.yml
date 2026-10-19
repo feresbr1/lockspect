@@ -1,0 +1,43 @@
+name: lockspect
+description: Fail CI on malicious, vulnerable, too-fresh or unpublished packages in your lockfile.
+author: feresbr1
+branding:
+  icon: lock
+  color: orange
+inputs:
+  path:
+    description: Lockfile to scan. Defaults to the first lockfile found in working-directory.
+    required: false
+    default: ''
+  working-directory:
+    description: Directory to look for a lockfile in.
+    required: false
+    default: '.'
+  fail-on:
+    description: 'Comma-separated rules: malware, vuln, vuln:critical, vuln:high, vuln:moderate, vuln:low, missing, fresh, install-script, deprecated, copyleft, none.'
+    required: false
+    default: malware
+  cooldown:
+    description: Flag versions published fewer than this many days ago.
+    required: false
+    default: '7'
+  allow-incomplete:
+    description: Do not fail when OSV.dev or deps.dev cannot be reached.
+    required: false
+    default: 'false'
+runs:
+  using: composite
+  steps:
+    - name: Scan lockfile
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        LOCKSPECT_PATH: ${{ inputs.path }}
+        LOCKSPECT_FAIL_ON: ${{ inputs.fail-on }}
+        LOCKSPECT_COOLDOWN: ${{ inputs.cooldown }}
+        LOCKSPECT_ALLOW_INCOMPLETE: ${{ inputs.allow-incomplete }}
+      run: |
+        args=(--fail-on "$LOCKSPECT_FAIL_ON" --cooldown "$LOCKSPECT_COOLDOWN" --markdown-file "$GITHUB_STEP_SUMMARY")
+        if [ -n "$LOCKSPECT_PATH" ]; then args=("$LOCKSPECT_PATH" "${args[@]}"); fi
+        if [ "$LOCKSPECT_ALLOW_INCOMPLETE" = "true" ]; then args+=(--allow-incomplete); fi
+        node "$GITHUB_ACTION_PATH/dist/cli/lockspect.mjs" "${args[@]}"
