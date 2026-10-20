@@ -1,4 +1,4 @@
-name: lockspect
+name: lockspect lockfile scanner
 description: Fail CI on malicious, vulnerable, too-fresh or unpublished packages in your lockfile.
 author: feresbr1
 branding:

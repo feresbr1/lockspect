@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] - 2026-10-20
+
+### Changed
+
+- The GitHub Action's display name is now "lockspect lockfile scanner", so it can be listed on the
+  GitHub Marketplace (the name "lockspect" is taken by an unrelated GitHub account). Usage is
+  unchanged: `uses: feresbr1/lockspect@v1`.
+
 ## [1.0.0] - 2026-10-19
 
 ### Added
@@ -14,4 +22,5 @@ All notable changes to this project are documented here. The format follows [Kee
 - Zero-dependency CLI (`npx github:feresbr1/lockspect`) with `--fail-on` rules and CI-friendly exit codes.
 - Composite GitHub Action that writes the report to the job summary.
 
+[1.0.1]: https://github.com/feresbr1/lockspect/releases/tag/v1.0.1
 [1.0.0]: https://github.com/feresbr1/lockspect/releases/tag/v1.0.0

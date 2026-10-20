@@ -1,6 +1,6 @@
 {
   "name": "lockspect",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Inspect any JavaScript lockfile for malware, known vulnerabilities, too-fresh releases, unpublished versions, install scripts and license risk. Runs in your browser or CI.",
   "type": "module",
   "license": "MIT",
